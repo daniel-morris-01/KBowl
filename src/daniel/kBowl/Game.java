@@ -28,8 +28,7 @@ public class Game {
 				
 		System.out.println("Full strikes - should be 300 and is:" +  g.score());
 		
-g=new Game();
-		
+		g=new Game();
 		g.roll(1);
 		g.roll(4);
 		g.roll(4);
@@ -51,6 +50,74 @@ g=new Game();
 		g.roll(6);
 						
 		System.out.println("Example in question - should be 133 and is:" +  g.score());
+		
+		g=new Game();
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+		g.roll(10);
+				
+		System.out.println("Test too many roles - should be 300 and is:" +  g.score());
+		
+		g=new Game();
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+		g.roll(0);
+				
+		System.out.println("Test total misses - should be 0 and is:" +  g.score());
+		
+		g=new Game();
+		g.roll(1);
+		g.roll(0);
+		g.roll(2);
+		g.roll(0);
+		g.roll(3);
+		g.roll(0);
+		g.roll(4);
+		g.roll(0);
+		g.roll(5);
+		g.roll(0);
+		g.roll(6);
+		g.roll(0);
+		g.roll(7);
+		g.roll(0);
+		g.roll(8);
+		g.roll(0);
+		g.roll(9);
+		g.roll(0);
+		g.roll(1);
+		g.roll(0);
+				
+		System.out.println("Test simple game - should be 46 and is:" +  g.score());
 
 	}
 	
@@ -125,7 +192,6 @@ g=new Game();
 				scoreValue+=GetStrikeExtraPoints(nextTurn,nextNextTurn);
 			}
 			
-			System.out.println(scoreValue);
 		}
 		return scoreValue;
 	}
