@@ -2,13 +2,15 @@ package daniel.kBowl;
 
 public class Turn {
 	private int[] tries=new int[2];
-	private int numberOfRolls=0;
 	private int totalScore=0;
 	private boolean isSpare;
 	private boolean isStrike=false;
-	private boolean isBonus=false;
-	private boolean isSpareBonus=false;
+	protected int numberOfRolls=0;
 	
+	protected int getMaxScore()
+	{
+		return 10;
+	}
 
 	public void roll(int pins) {
 		tries[numberOfRolls]=pins;
@@ -25,7 +27,7 @@ public class Turn {
 			isSpare=true;
 		}
 		
-		if(totalScore==10  && !isBonus)
+		if(totalScore==getMaxScore())
 		{
 			numberOfRolls=tries.length;
 		}
@@ -33,7 +35,7 @@ public class Turn {
 	
 	public boolean isFinished()
 	{
-		return numberOfRolls==tries.length || (isSpareBonus && numberOfRolls==1);
+		return numberOfRolls==tries.length;
 	}
 	
 	public int getFirstTry()
@@ -54,16 +56,5 @@ public class Turn {
 	{
 		return isStrike;
 	}
-	
-	public boolean getIsBonus() {
-		return isBonus;
-	}
-	
-	public void setIsBonus() {
-		isBonus=true;
-	}
 
-	public void setIsSpareBonus() {
-		isSpareBonus=true;
-	}
 }

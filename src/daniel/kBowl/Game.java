@@ -144,26 +144,21 @@ public class Game {
 			if(currentTurn.isFinished())
 			{
 				currentTurnIndex++;
-				boolean isLastTurn=currentTurnIndex==turnsInGame && !currentTurn.getIsBonus();
-				Turn nextTurn=null;
-				if(currentTurnIndex<turns.size())
+				boolean isLastTurn=currentTurnIndex==turnsInGame;
+				
+				if(isLastTurn && (currentTurn.getIsSpare()))
 				{
-					nextTurn=turns.get(currentTurnIndex);
+					turns.add(new BonusTurnAfterSpare());
 				}
-				if(isLastTurn && (currentTurn.getIsSpare() || currentTurn.getIsStrike()))
+				if(isLastTurn && currentTurn.getIsStrike())
 				{
-					nextTurn=new Turn();
-					nextTurn.setIsBonus();
-					turns.add(nextTurn);
-				}
-				if(isLastTurn && currentTurn.getIsSpare())
-				{
-					nextTurn.setIsSpareBonus();
+					turns.add(new BonusTurnAfterStrike());
 				}
 			}
 			
 		}
 	}
+	
 	
 	public int score()
 	{
@@ -172,6 +167,7 @@ public class Game {
 			Turn currentTurn=turns.get(i);
 			Turn nextTurn=null;
 			Turn nextNextTurn=null;
+			
 			if(i+1<turns.size())
 			{
 				nextTurn=turns.get(i+1);
@@ -199,16 +195,16 @@ public class Game {
 	private int GetStrikeExtraPoints(Turn nextTurn,Turn nextNextTurn) {
 		int strikeExtraPoints=0;
 		
-		if(nextTurn.getIsBonus())
+		if(nextTurn instanceof BonusTurn)
 		{
 			strikeExtraPoints= nextTurn.getTotalScore();
 		}
-		if(!nextTurn.getIsBonus() && nextTurn.getIsStrike())
+		if(!(nextTurn instanceof BonusTurn) && nextTurn.getIsStrike())
 		{
 			strikeExtraPoints= nextTurn.getTotalScore()
 					+ nextNextTurn.getFirstTry();
 		}
-		if(!nextTurn.getIsBonus() && !nextTurn.getIsStrike())
+		if(!(nextTurn instanceof BonusTurn) && !nextTurn.getIsStrike())
 		{
 			strikeExtraPoints= nextTurn.getTotalScore();
 		}
